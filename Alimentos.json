@@ -1,0 +1,42 @@
+[
+    {
+        "Nome": "Arroz Negro",
+        "Unidade":"Gramas",
+        "Porcao": 100,
+        "Carboidrato": 43,
+        "Proteina": 5.2,
+        "Gordura": 2,
+        "Min": 100,
+        "Max": 200
+    },
+    {
+        "Nome": "Peito de Frango",
+        "Unidade":"Gramas",
+        "Porcao": 100,
+        "Carboidrato": 0,
+        "Proteina": 21.50,
+        "Gordura": 3,
+        "Min": 100,
+        "Max": 200
+    },
+    {
+        "Nome": "Lentinha",
+        "Unidade":"Gramas",
+        "Porcao": 100,
+        "Carboidrato": 56,
+        "Proteina": 28,
+        "Gordura": 1,
+        "Min": 100,
+        "Max": 200
+    },
+    {
+        "Nome": "Ovo",
+        "Unidade":"Unidades",
+        "Porcao": 1,
+        "Carboidrato": 0,
+        "Proteina": 6,
+        "Gordura": 6,
+        "Min": 100,
+        "Max": 200
+    }
+]
