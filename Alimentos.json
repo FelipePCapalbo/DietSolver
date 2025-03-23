@@ -1,5 +1,15 @@
 [
     {
+        "Nome": "Arroz - Cru",
+        "Unidade":"Gramas",
+        "Porcao": 50,
+        "Carboidrato": 40,
+        "Proteina": 3.2,
+        "Gordura": 0,
+        "Min": 0,
+        "Max": 0
+    },
+    {
         "Nome": "Arroz Negro - Cru",
         "Unidade":"Gramas",
         "Porcao": 50,
@@ -30,6 +40,16 @@
         "Max": 0
     },
     {
+        "Nome": "Iogurte Natural - Integral",
+        "Unidade":"Unidades",
+        "Porcao": 1,
+        "Carboidrato": 8,
+        "Proteina": 6.1,
+        "Gordura": 5.1,
+        "Min": 2,
+        "Max": 2
+    },
+    {
         "Nome": "Ovo",
         "Unidade":"Unidades",
         "Porcao": 1,
@@ -42,10 +62,10 @@
     {
         "Nome": "Óleo",
         "Unidade":"Unidades",
-        "Porcao": 16,
+        "Porcao": 1,
         "Carboidrato": 0,
         "Proteina": 0,
-        "Gordura": 15,
+        "Gordura": 0.8,
         "Min": 0,
         "Max": 20
     }

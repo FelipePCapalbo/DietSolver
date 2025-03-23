@@ -199,7 +199,7 @@ while k < max_solucoes:
 if solutions:
     # Ordena as soluções pelo valor do objetivo (quanto menor, melhor)
     solutions.sort(key=lambda s: s[1])
-    print("\n=== Top Cardápios Propostos ===")
+    print("\n=== Cardápio(s) Proposto(s) ===")
     for idx, sol_data in enumerate(solutions, start=1):
         sol, obj_val, tot_prot, tot_carb, tot_fat, tot_cal = sol_data
         print(f"\n--- Cardápio {idx} ---")
