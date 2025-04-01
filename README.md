@@ -83,7 +83,7 @@ pip install pulp
 ## Execução
 
 ```bash
-python cardapio_otimizador.py
+python solver.py
 ```
 
 O programa abrirá um menu interativo para selecionar alimentos e retornará até 5 cardápios otimizados.
