@@ -46,8 +46,8 @@
         "Carboidrato": 8,
         "Proteina": 6.1,
         "Gordura": 5.1,
-        "Min": 2,
-        "Max": 2
+        "Min": 0,
+        "Max": 0
     },
     {
         "Nome": "Ovo",
@@ -56,8 +56,48 @@
         "Carboidrato": 0,
         "Proteina": 6,
         "Gordura": 6,
-        "Min": 4,
+        "Min": 2,
         "Max": 0
+    },
+    {
+        "Nome": "Pasta de Amendoim",
+        "Unidade":"Gramas",
+        "Porcao": 15,
+        "Carboidrato": 3,
+        "Proteina": 4.1,
+        "Gordura": 6.6,
+        "Min": 30,
+        "Max": 30
+    },
+    {
+        "Nome": "Ricota",
+        "Unidade":"Gramas",
+        "Porcao": 30,
+        "Carboidrato": 0.6,
+        "Proteina": 3.9,
+        "Gordura": 3,
+        "Min": 40,
+        "Max": 40
+    },
+    {
+        "Nome": "Pão 100% Integral - Wickbold",
+        "Unidade":"Gramas",
+        "Porcao": 50,
+        "Carboidrato": 18,
+        "Proteina": 6.8,
+        "Gordura": 2.7,
+        "Min": 50,
+        "Max": 50
+    },
+    {
+        "Nome": "Leite Semidesnatado",
+        "Unidade":"Unidades",
+        "Porcao": 200,
+        "Carboidrato": 9.2,
+        "Proteina": 6.2,
+        "Gordura": 2.4,
+        "Min": 200,
+        "Max": 200
     },
     {
         "Nome": "Óleo",
