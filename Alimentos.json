@@ -7,7 +7,7 @@
         "Proteina": 3.2,
         "Gordura": 0,
         "Min": 0,
-        "Max": 0
+        "Max": 300
     },
     {
         "Nome": "Arroz Negro - Cru",
@@ -27,17 +27,17 @@
         "Proteina": 21.50,
         "Gordura": 3,
         "Min": 300,
-        "Max": 0
+        "Max": 600
     },
     {
-        "Nome": "Lentinha - Cru",
+        "Nome": "Lentilha - Cru",
         "Unidade":"Gramas",
         "Porcao": 100,
         "Carboidrato": 56,
         "Proteina": 28,
         "Gordura": 1,
         "Min": 0,
-        "Max": 0
+        "Max": 150
     },
     {
         "Nome": "Iogurte Natural - Integral",
@@ -57,7 +57,7 @@
         "Proteina": 6,
         "Gordura": 6,
         "Min": 2,
-        "Max": 0
+        "Max": 9
     },
     {
         "Nome": "Pasta de Amendoim",
@@ -76,8 +76,8 @@
         "Carboidrato": 0.6,
         "Proteina": 3.9,
         "Gordura": 3,
-        "Min": 40,
-        "Max": 40
+        "Min": 50,
+        "Max": 50
     },
     {
         "Nome": "Pão 100% Integral - Wickbold",
