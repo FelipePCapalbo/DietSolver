@@ -79,12 +79,12 @@ F - f^* &\le \delta_f & & f^* - F \le \delta_f
 \end{alignedat}
 $$
 
-### Função-Objetivo
+### Função‑Objetivo
 
 Minimizar o desvio relativo total:
 
 $$
-\min \left( \frac{\delta_p}{p^*} + \frac{\delta_c}{c^*} + \frac{\delta_f}{f^*} \right)
+\operatorname*{min}\;\Biggl( \frac{\delta_p}{p^{*}}\; +\; \frac{\delta_c}{c^{*}}\; +\; \frac{\delta_f}{f^{*}} \Biggr)
 $$
 
 ### Outras Restrições
@@ -92,13 +92,13 @@ $$
 - **Limites de porção:** $\text{Min}_i \le m_i\,y_i \le \text{Max}_i$  
 - **Integralidade:** $y_i \in \mathbb{Z}_{\ge 0}$
 
-Após cada solução ótima, adiciona-se um *No-Good Cut* para garantir que o próximo cardápio difira em pelo menos um alimento, permitindo gerar até 5 soluções.
+Após cada solução ótima, adiciona‑se um *No‑Good Cut* para garantir que o próximo cardápio difira em pelo menos um alimento, permitindo gerar até 5 soluções.
 
 ---
 
 ## Requisitos
 
-- Python 3.7+  
+- Python 3.7+  
 - Biblioteca **`pulp`**
 
 ```bash
