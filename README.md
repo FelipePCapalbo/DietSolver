@@ -1,14 +1,17 @@
 # Otimizador de Cardápios com Ajuste de Macros
 
-Este programa interativo em Python propõe cardápios personalizados otimizando as quantidades de alimentos para atingir metas diárias de **macronutrientes** (proteína, carboidrato e gordura), respeitando as restrições calóricas e de porção dos alimentos escolhidos.
+Este programa interativo em Python propõe cardápios personalizados **minimizando os desvios** em relação às metas diárias de macronutrientes  
+(proteína, carboidrato e gordura) e **respeitando** a restrição calórica total e os limites de porção de cada alimento.
+
+---
 
 ## Funcionalidades
 
-- Leitura de metas de macros a partir de um arquivo JSON (`Macros.json`)
-- Seleção manual dos alimentos disponíveis no cardápio a partir de `Alimentos.json`
-- Modelagem matemática do problema com programação linear inteira
-- Geração de até 5 cardápios distintos com mínimos desvios das metas de macros
-- Respeito a restrições individuais de porção mínima e máxima por alimento
+- Leitura das metas de macros em `Macros.json`
+- Seleção manual de alimentos disponíveis a partir de `Alimentos.json`
+- **Programação Linear Inteira** para otimizar as quantidades
+- Geração de até **5 cardápios** distintos com desvios mínimos
+- Limites opcionais de consumo mínimo/máximo por alimento
 
 ---
 
@@ -26,53 +29,93 @@ Este programa interativo em Python propõe cardápios personalizados otimizando 
 
 ### `Alimentos.json`
 
-Lista de dicionários com os campos:
-
-- `Nome`: Nome do alimento
-- `Porcao`: Quantidade base para os macros indicados (em gramas ou unidades)
-- `Proteina`, `Carboidrato`, `Gordura`: Quantidade por porção
-- `Unidade`: `"Gramas"` ou `"Unidades"`
-- `Min` (opcional): Consumo mínimo permitido
-- `Max` (opcional): Consumo máximo permitido
+| Campo        | Descrição                                                            |
+|--------------|-----------------------------------------------------------------------|
+| `Nome`       | Nome do alimento                                                     |
+| `Porcao`     | Quantidade base (g ou unid.) para os macros informados               |
+| `Proteina`   | g de proteína por porção                                             |
+| `Carboidrato`| g de carboidrato por porção                                          |
+| `Gordura`    | g de gordura por porção                                              |
+| `Unidade`    | `"Gramas"` *(default)* ou `"Unidades"`                               |
+| `Min`        | (opcional) consumo mínimo permitido                                  |
+| `Max`        | (opcional) consumo máximo permitido                                  |
 
 ---
 
 ## Modelagem Matemática
 
-### Cálculo dos macronutrientes totais:
+### Variáveis
 
-![Proteína](equations/macros_protein.png)  
-![Carboidrato](equations/macros_carb.png)  
-![Gordura](equations/macros_fat.png)
+| Símbolo | Significado                                   |
+|---------|-----------------------------------------------|
+| \(y_i\) | quantidade do alimento *i* em **blocos** (inteiro) |
+| \(m_i\) | multiplicador do bloco (*10 g* se `Gramas`, *1* se `Unidades`) |
+| \(P_i, C_i, F_i\) | macros por porção (g) de proteína, carboidrato e gordura |
+| \(p^\*, c^\*, f^\*\) | metas diárias de proteína, carboidrato e gordura |
+| \(\delta_p,\; \delta_c,\; \delta_f\) | desvios absolutos (variáveis contínuas) |
 
----
+### Expressões dos macros entregues
 
-### Linearização dos desvios absolutos:
+\[
+\begin{aligned}
+P &= \sum_{i} m_i\,y_i \\frac{P_i}{\text{Porção}_i} \\\
+C &= \sum_{i} m_i\,y_i \\frac{C_i}{\text{Porção}_i} \\\
+F &= \sum_{i} m_i\,y_i \\frac{F_i}{\text{Porção}_i}
+\end{aligned}
+\]
 
-![Desvio Proteína](equations/linearizacao_protein.png)  
-![Desvio Carboidrato](equations/linearizacao_carb.png)  
-![Desvio Gordura](equations/linearizacao_fat.png)
+### Restrição calórica
 
----
+\[
+\sum_{i} m_i\,y_i\,
+\frac{4P_i + 4C_i + 9F_i}{\text{Porção}_i}
+\;=\;
+\underbrace{4p^\* + 4c^\* + 9f^\*}_{\text{caloria-meta}}
+\]
 
-### Restrição Calórica:
+### Linearização dos desvios absolutos
 
-![Restrição Calórica](equations/calorias_expr.png)
+\[
+\begin{cases}
+P - p^\* \;\le\; \delta_p \\
+ p^\* - P \;\le\; \delta_p
+\end{cases}
+\quad
+\begin{cases}
+C - c^\* \;\le\; \delta_c \\
+ c^\* - C \;\le\; \delta_c
+\end{cases}
+\quad
+\begin{cases}
+F - f^\* \;\le\; \delta_f \\
+ f^\* - F \;\le\; \delta_f
+\end{cases}
+\]
 
----
+### Função-objetivo
 
-### Função Objetivo:
+Minimizar o desvio relativo total:
 
-![Função Objetivo](equations/funcao_objetivo.png)
+\[
+\min\;
+\left(\frac{\delta_p}{p^\*}\right) +
+\left(\frac{\delta_c}{c^\*}\right) +
+\left(\frac{\delta_f}{f^\*}\right)
+\]
+
+### Outras restrições
+
+- **Limites de porção:**  \(\text{Min}_i \le m_i\,y_i \le \text{Max}_i\)
+- **Variáveis inteiras:** \(y_i \in \mathbb{Z}_{\ge 0}\)
+
+Após cada solução ótima, adiciona-se um “No-Good Cut” para garantir que o próximo cardápio difira em pelo menos um alimento, permitindo gerar até 5 soluções.
 
 ---
 
 ## Requisitos
 
 - Python 3.7+
-- Biblioteca `pulp`
-
-Instalação:
+- Biblioteca **`pulp`**
 
 ```bash
 pip install pulp
@@ -86,13 +129,13 @@ pip install pulp
 python solver.py
 ```
 
-O programa abrirá um menu interativo para selecionar alimentos e retornará até 5 cardápios otimizados.
+Escolha os alimentos no menu interativo e receba os cardápios otimizados.
 
 ---
 
-## Exemplo de saída
+## Exemplo de Saída
 
-```
+```text
 --- Cardápio 1 ---
 Frango: 200 Gramas
 Arroz: 150 Gramas
@@ -101,12 +144,8 @@ Calorias Totais: 2200.0 cal
 Macros entregues:
   Proteína: 130.0g (meta: 130g)
   Carboidrato: 250.0g (meta: 250g)
-  Gordura: 60.0g (meta: 60g)
+  Gordura:  60.0g (meta: 60g)
 Valor do Objetivo (desvios normalizados): 0.0000
 ```
 
 ---
-
-## Licença
-
-MIT License
